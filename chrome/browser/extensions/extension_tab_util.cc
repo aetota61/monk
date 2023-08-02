@@ -803,7 +803,8 @@ bool ExtensionTabUtil::IsKillURL(const GURL& url) {
       content::kChromeUIBrowserCrashHost, content::kChromeUIMemoryExhaustHost,
   };
 
-  if (!url.SchemeIs(content::kChromeUIScheme))
+  // if (!url.SchemeIs(content::kChromeUIScheme))
+  if (!url.SchemeIs(content::kMonkUIScheme))
     return false;
 
   return base::Contains(kill_hosts, url.host_piece());

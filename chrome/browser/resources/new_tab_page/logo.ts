@@ -260,10 +260,11 @@ export class LogoElement extends PolymerElement {
   }
 
   private computeShowDoodle_(): boolean {
-    return !!this.imageDoodle_ ||
+    return false;
+    // return !!this.imageDoodle_ ||
         /* We hide interactive doodles when offline. Otherwise, the iframe
            would show an ugly error page. */
-        !!this.doodle_ && !!this.doodle_.interactive && window.navigator.onLine;
+        // !!this.doodle_ && !!this.doodle_.interactive && window.navigator.onLine;
   }
 
   private computeDoodleBoxed_(): boolean {
@@ -312,6 +313,14 @@ export class LogoElement extends PolymerElement {
         onClickUrl.searchParams.append(param[0], param[1]);
       }
     }
+    WindowProxy.getInstance().open(onClickUrl.toString());
+  }
+
+  private onLogoClick_() {
+    // if ($$<HTMLElement>(this, '#logo')!.tabIndex < 0) {
+    //   return;
+    // }
+    const onClickUrl = new URL("https://www.monkbrowser.com/");
     WindowProxy.getInstance().open(onClickUrl.toString());
   }
 

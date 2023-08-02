@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grit-part>
+  <include name="IDR_QUOTE_UI_CSS" file="../quote_ui/resources/quote.css" type="BINDATA" />
+  <if expr="is_android or is_ios">
+    <include name="IDR_QUOTE_UI_MOBILE_CSS" file="../quote_ui/resources/quote_mobile.css" type="BINDATA" />
+  </if>
+  <include name="IDR_QUOTE_UI_HTML" file="../quote_ui/resources/quote.html" preprocess="true" type="BINDATA" />
+  <include name="IDR_QUOTE_UI_JS" file="${root_gen_dir}/components/quote_ui/resources/tsc/quote.js" use_base_dir="false" type="BINDATA" />
+</grit-part>

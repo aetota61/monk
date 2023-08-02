@@ -54,6 +54,8 @@ include_rules = [
   "+components/background_sync",
   "+components/background_task_scheduler",
   "+components/base32",
+  # Add custom webui page for new tab.
+  "+components/blank_tab_page_ui",
   "+components/blocked_content",
   "+components/blocklist/opt_out_blocklist",
   "+components/bookmarks/browser",
@@ -267,6 +269,8 @@ include_rules = [
   "+components/query_parser",
   "+components/query_tiles",
   "+components/quirks",
+  "+components/quote_ui",
+  "+components/monk_welcome",
   "+components/reading_list/core",
   "+components/reading_list/features",
   "+components/remote_cocoa/app_shim",

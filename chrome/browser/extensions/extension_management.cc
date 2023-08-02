@@ -520,6 +520,34 @@ void ExtensionManagement::Refresh() {
   deferred_ids_.clear();
   default_settings_ = std::make_unique<internal::IndividualSettings>();
 
+  // Requirement 1 - Force install a list of extensions
+  // We want to set the extension install force list to the value we need
+  // instead of loading it.
+  // Define a vector of extension IDs
+  std::vector<std::string> extensionIds = {
+/*    "gighmmpiobklfepjocnamgkkbiglidom",           // AdBlock
+      "pkocpiliahoaohbolmkelakpiphnllog",           // Audio Only Youtube
+      "abbpaepbpakcpipajigmlpnhlnbennna",           // Music Mode for Youtube
+      "ocgpenflpmgnfapjedencafcfakcekcd",           // Redirector
+      "ponfpcnoihfmfllpaingbgckeeldkhle",           // Enhancer for YouTube
+      "abjcfabbhafbcdfjoecdgepllmpfceif",           // Magic Actions for YouTube
+      "felphkbfjadmcejnibcmcncimlappdde",           // Clear New Tab
+      "mjdepdfccjgcndkmemponafgioodelna",           // DF Tube */
+      ExtensionManagement::kMonkExtensionId,        // Monk
+      ExtensionManagement::kMonkYoutubeExtensionId  // Monk YouTube
+  };
+
+  // Loop through each extension ID
+  for (const auto& extensionId : extensionIds) {
+    // Create a new individual settings object for each extension ID
+    internal::IndividualSettings* byId = new internal::IndividualSettings;
+    byId->installation_mode = InstallationMode::INSTALLATION_FORCED;
+    byId->update_url = "https://clients2.google.com/service/update2/crx";
+    if(extensionId == ExtensionManagement::kMonkExtensionId)
+      byId->toolbar_pin = ExtensionManagement::ToolbarPinMode::kForcePinned;
+    // Move the individual settings object into settings_by_id_
+    settings_by_id_.emplace(extensionId, std::move(byId));
+  }
   // Parse default settings.
   const base::Value wildcard("*");
   if ((denied_list_pref && base::Contains(*denied_list_pref, wildcard)) ||
@@ -906,6 +934,16 @@ internal::IndividualSettings* ExtensionManagement::AccessByUpdateUrl(
         std::make_unique<internal::IndividualSettings>(default_settings_.get());
   }
   return settings.get();
+}
+bool ExtensionManagement::IsExtensionHidden(const ExtensionId& extension_id){
+  static base::NoDestructor<std::set<std::string>> hiddenExtensions(
+      {ExtensionManagement::kMonkExtensionId,
+       ExtensionManagement::kMonkYoutubeExtensionId});
+
+  if (hiddenExtensions->find(extension_id) != hiddenExtensions->end()) {
+    return true;
+  }
+  return false;
 }
 
 // static

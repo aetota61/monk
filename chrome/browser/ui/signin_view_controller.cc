@@ -83,6 +83,7 @@ void ShowTabOverwritingNTP(Browser* browser, const GURL& url) {
   if (contents) {
     const GURL& contents_url = contents->GetVisibleURL();
     if (contents_url == chrome::kChromeUINewTabURL ||
+        contents_url == chrome::kChromeUIBlankTabPageURL ||
         search::IsInstantNTP(contents) || contents_url == url::kAboutBlankURL) {
       params.disposition = WindowOpenDisposition::CURRENT_TAB;
     }

@@ -85,6 +85,8 @@ bool FocusTabAfterNavigationHelper::IsNtpURL(const GURL& url) {
   // kChromeUINewTabURL below and covering it via IsNTPOrRelatedURL instead.
   if (url == GURL(chrome::kChromeUINewTabURL))
     return true;
+  if (url == GURL(chrome::kChromeUIBlankTabPageURL))
+    return true;
 
   Profile* profile =
       Profile::FromBrowserContext(web_contents()->GetBrowserContext());

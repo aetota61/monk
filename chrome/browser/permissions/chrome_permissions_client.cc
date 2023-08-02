@@ -455,6 +455,8 @@ bool ChromePermissionsClient::CanBypassEmbeddingOriginCheck(
   // The New Tab Page is excluded from origin checks as its effective
   // requesting origin may be the Default Search Engine origin.
   return embedding_origin ==
+             GURL(chrome::kChromeUIBlankTabPageURL).DeprecatedGetOriginAsURL() ||
+         embedding_origin ==
              GURL(chrome::kChromeUINewTabURL).DeprecatedGetOriginAsURL() ||
          embedding_origin ==
              GURL(chrome::kChromeUINewTabPageURL).DeprecatedGetOriginAsURL();
@@ -489,10 +491,14 @@ absl::optional<GURL> ChromePermissionsClient::OverrideCanonicalOrigin(
 bool ChromePermissionsClient::DoURLsMatchNewTabPage(
     const GURL& requesting_origin,
     const GURL& embedding_origin) {
-  return embedding_origin ==
+  return ((embedding_origin ==
              GURL(chrome::kChromeUINewTabURL).DeprecatedGetOriginAsURL() &&
          requesting_origin ==
-             GURL(chrome::kChromeUINewTabPageURL).DeprecatedGetOriginAsURL();
+             GURL(chrome::kChromeUINewTabPageURL).DeprecatedGetOriginAsURL()) ||
+         (embedding_origin ==
+             GURL(chrome::kChromeUIBlankTabPageURL).DeprecatedGetOriginAsURL() &&
+         requesting_origin ==
+             GURL(chrome::kChromeUINewTabPageURL).DeprecatedGetOriginAsURL()));
 }
 
 #if BUILDFLAG(IS_ANDROID)

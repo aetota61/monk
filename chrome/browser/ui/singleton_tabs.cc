@@ -43,6 +43,7 @@ void ShowSingletonTabOverwritingNTP(Browser* browser, NavigateParams* params) {
   if (contents) {
     const GURL& contents_url = contents->GetVisibleURL();
     if (contents_url == chrome::kChromeUINewTabURL ||
+        contents_url == chrome::kChromeUIBlankTabPageURL ||
         search::IsInstantNTP(contents) || contents_url == url::kAboutBlankURL) {
       int tab_index = GetIndexOfExistingTab(browser, *params);
       if (tab_index < 0) {

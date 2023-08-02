@@ -244,7 +244,8 @@ bool IsNTPOrRelatedURL(const GURL& url, Profile* profile) {
     return false;
 
   if (!IsInstantExtendedAPIEnabled())
-    return url == chrome::kChromeUINewTabURL;
+    return url == chrome::kChromeUINewTabURL ||
+           url == chrome::kChromeUIBlankTabPageURL;
 
   return profile && IsNTPOrRelatedURLHelper(url, profile);
 }

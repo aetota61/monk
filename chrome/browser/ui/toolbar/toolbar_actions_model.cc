@@ -177,6 +177,7 @@ void ToolbarActionsModel::OnReady() {
 
 bool ToolbarActionsModel::ShouldAddExtension(
     const extensions::Extension* extension) {
+
   // In incognito mode, don't add any extensions that aren't incognito-enabled.
   if (profile_->IsOffTheRecord() &&
       !extensions::util::IsIncognitoEnabled(extension->id(), profile_))

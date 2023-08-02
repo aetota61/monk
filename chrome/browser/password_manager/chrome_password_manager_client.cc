@@ -945,7 +945,9 @@ bool ChromePasswordManagerClient::IsIsolationForPasswordSitesEnabled() const {
 bool ChromePasswordManagerClient::IsNewTabPage() const {
   auto origin = GetLastCommittedURL().DeprecatedGetOriginAsURL();
   return origin ==
-             GURL(chrome::kChromeUINewTabPageURL).DeprecatedGetOriginAsURL() ||
+           GURL(chrome::kChromeUIBlankTabPageURL).DeprecatedGetOriginAsURL() ||
+         origin ==
+           GURL(chrome::kChromeUINewTabPageURL).DeprecatedGetOriginAsURL() ||
          origin == GURL(chrome::kChromeUINewTabURL).DeprecatedGetOriginAsURL();
 }
 

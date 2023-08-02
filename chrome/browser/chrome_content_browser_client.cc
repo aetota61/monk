@@ -875,7 +875,8 @@ bool HandleNewTabPageLocationOverride(
     GURL* url,
     content::BrowserContext* browser_context) {
   if (!url->SchemeIs(content::kChromeUIScheme) ||
-      url->host() != chrome::kChromeUINewTabHost) {
+      (url->host() != chrome::kChromeUINewTabHost && 
+       url->host() != chrome::kChromeUIBlankTabPageHost)) {
     return false;
   }
 
@@ -2001,7 +2002,8 @@ bool ChromeContentBrowserClient::ShouldUseProcessPerSite(
 
   // NTP should use process-per-site.  This is a performance optimization to
   // reduce process count associated with NTP tabs.
-  if (site_url == GURL(chrome::kChromeUINewTabURL) ||
+  if (site_url == GURL(chrome::kChromeUIBlankTabPageURL) ||
+  	  site_url == GURL(chrome::kChromeUINewTabURL) ||
       site_url == GURL(chrome::kChromeUINewTabPageURL)) {
     return true;
   }

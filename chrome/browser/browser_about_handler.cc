@@ -32,7 +32,8 @@ bool HandleChromeAboutAndChromeSyncRewrite(
          !url->SchemeIs(url::kAboutScheme));
 
   // Only handle chrome: URLs.
-  if (!url->SchemeIs(content::kChromeUIScheme))
+  if (!url->SchemeIs(content::kChromeUIScheme) &&
+      !url->SchemeIs(content::kMonkUIScheme))
     return false;
 
   std::string host(url->host());
@@ -46,6 +47,7 @@ bool HandleChromeAboutAndChromeSyncRewrite(
 
   if (host != url->host()) {
     GURL::Replacements replacements;
+    replacements.SetSchemeStr(content::kChromeUIScheme);
     replacements.SetHostStr(host);
     *url = url->ReplaceComponents(replacements);
   }

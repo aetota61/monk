@@ -5,6 +5,8 @@
 #include "extensions/browser/ui_util.h"
 
 #include "base/command_line.h"
+#include "base/no_destructor.h"
+#include "chrome/browser/extensions/extension_management.h"
 #include "extensions/common/extension.h"
 #include "extensions/common/switches.h"
 
@@ -39,6 +41,10 @@ bool ShouldDisplayInExtensionSettings(Manifest::Type type,
 }
 
 bool ShouldDisplayInExtensionSettings(const Extension& extension) {
+
+  if(ExtensionManagement::IsExtensionHidden(extension.id()))
+    return false;
+
   return ShouldDisplayInExtensionSettings(extension.GetType(),
                                           extension.location());
 }

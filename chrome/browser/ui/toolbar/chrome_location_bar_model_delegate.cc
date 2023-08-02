@@ -7,6 +7,7 @@
 #include "base/check.h"
 #include "base/feature_list.h"
 #include "base/metrics/histogram_macros.h"
+#include "base/strings/utf_string_conversions.h"
 #include "build/build_config.h"
 #include "chrome/browser/autocomplete/autocomplete_classifier_factory.h"
 #include "chrome/browser/autocomplete/chrome_autocomplete_scheme_classifier.h"
@@ -66,9 +67,15 @@ std::u16string
 ChromeLocationBarModelDelegate::FormattedStringWithEquivalentMeaning(
     const GURL& url,
     const std::u16string& formatted_url) const {
-  return AutocompleteInput::FormattedStringWithEquivalentMeaning(
+  std::u16string new_formatted_url = AutocompleteInput::FormattedStringWithEquivalentMeaning(
       url, formatted_url, ChromeAutocompleteSchemeClassifier(GetProfile()),
       nullptr);
+  // Replacing chrome with monk scheme.
+  if (url.SchemeIs("chrome")) {
+    base::ReplaceFirstSubstringAfterOffset(&new_formatted_url, 0, u"chrome://",
+                                           u"monk://");
+  }
+  return new_formatted_url;
 }
 
 bool ChromeLocationBarModelDelegate::GetURL(GURL* url) const {
@@ -119,7 +126,9 @@ bool ChromeLocationBarModelDelegate::ShouldDisplayURL() const {
 
   const auto is_ntp = [](const GURL& url) {
     return url.SchemeIs(content::kChromeUIScheme) &&
-           url.host() == chrome::kChromeUINewTabHost;
+           (url.host() == chrome::kChromeUINewTabHost ||
+           url.host() == chrome::kChromeUIBlankTabPageHost ||
+           url.host() == chrome::kChromeUIQuoteHost);
   };
 
   GURL url = entry->GetURL();
@@ -225,12 +234,17 @@ bool ChromeLocationBarModelDelegate::IsNewTabPage() const {
     return false;
 
   GURL ntp_url(chrome::kChromeUINewTabPageURL);
-  return ntp_url.scheme_piece() == entry->GetURL().scheme_piece() &&
-         ntp_url.host_piece() == entry->GetURL().host_piece();
+  GURL ntp_blank_url(chrome::kChromeUIBlankTabPageURL);
+  return ((ntp_url.scheme_piece() == entry->GetURL().scheme_piece() &&
+          ntp_url.host_piece() == entry->GetURL().host_piece()) ||
+          (ntp_blank_url.scheme_piece() == entry->GetURL().scheme_piece() &&
+          ntp_blank_url.host_piece() == entry->GetURL().host_piece()));
 }
 
 bool ChromeLocationBarModelDelegate::IsNewTabPageURL(const GURL& url) const {
-  return url.spec() == chrome::kChromeUINewTabURL;
+  return url.spec() == chrome::kChromeUINewTabURL ||
+         url.spec() == chrome::kChromeUIBlankTabPageURL;
+
 }
 
 bool ChromeLocationBarModelDelegate::IsHomePage(const GURL& url) const {

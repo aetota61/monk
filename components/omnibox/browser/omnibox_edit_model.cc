@@ -61,6 +61,7 @@
 #include "components/search_engines/template_url_prepopulate_data.h"
 #include "components/search_engines/template_url_service.h"
 #include "components/strings/grit/components_strings.h"
+#include "content/public/common/url_constants.h"
 #include "net/cookies/cookie_util.h"
 #include "third_party/icu/source/common/unicode/ubidi.h"
 #include "third_party/metrics_proto/omnibox_event.pb.h"
@@ -527,6 +528,12 @@ void OmniboxEditModel::AdjustTextForCopy(int sel_min,
       (*text == display_text_ || *text == url_for_editing_)) {
     *url_from_text = delegate()->GetLocationBarModel()->GetURL();
     *write_url = true;
+
+    if (url_from_text->scheme() == content::kChromeUIScheme) {
+      GURL::Replacements replacements;
+      replacements.SetSchemeStr(content::kMonkUIScheme);
+      *url_from_text = url_from_text->ReplaceComponents(replacements);
+    }
 
     // Don't let users copy Reader Mode page URLs.
     // We display the original article's URL in the omnibox, so users will

@@ -29,6 +29,7 @@ bool IsInternalPage(const GURL& url) {
       chrome::kChromeUIHistoryURL,
       chrome::kChromeUINewTabURL,
       chrome::kChromeUISettingsURL,
+      chrome::kChromeUIBlankTabPageURL,
   };
   // Prefix-match against the table above. Use strncmp to avoid allocating
   // memory to convert the URL prefix constants into std::strings.

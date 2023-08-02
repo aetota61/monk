@@ -40,6 +40,7 @@
 #include <utility>
 
 #include "base/auto_reset.h"
+#include "base/strings/utf_string_conversions.h"
 #include "base/trace_event/typed_macros.h"
 #include "base/unguessable_token.h"
 #include "mojo/public/cpp/bindings/pending_remote.h"
@@ -519,7 +520,18 @@ bool FrameLoader::AllowRequestForThisFrame(const FrameLoadRequest& request) {
   if (!request.GetOriginWindow())
     return true;
 
+  // We want to allow resource request for the quote page.
   const KURL& url = request.GetResourceRequest().Url();
+  std::string host = url.Host().Utf8();
+  if (host.substr(0, 4) == "www.") {
+      host = host.substr(4);
+  }
+  size_t pos = host.find_first_of(":/");
+  if (pos != std::string::npos) {
+      host = host.substr(0, pos);
+  }
+  if (host == "quote") return true;
+
   if (url.ProtocolIsJavaScript()) {
     if (request.GetOriginWindow()
             ->CheckAndGetJavascriptUrl(request.JavascriptWorld().get(), url,

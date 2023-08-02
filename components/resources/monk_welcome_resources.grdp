@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grit-part>
+  <include name="IDR_MONK_WELCOME_UI_HTML" file="../monk_welcome/resources/monk_welcome.html"
+    preprocess="true" type="BINDATA" />
+</grit-part>

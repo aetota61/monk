@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grit-part>
+  <message name="IDS_QUOTE_UI_QUOTE" desc="Quote">
+    Quote
+  </message>
+</grit-part>

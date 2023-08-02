@@ -229,9 +229,11 @@ void TabManager::RemoveObserver(TabLifecycleObserver* observer) {
 bool TabManager::IsInternalPage(const GURL& url) {
   // There are many chrome:// UI URLs, but only look for the ones that users
   // are likely to have open. Most of the benefit is the from NTP URL.
+  // Add the BlankTabPage in places we check for NewTab page.
   const char* const kInternalPagePrefixes[] = {
       chrome::kChromeUIDownloadsURL, chrome::kChromeUIHistoryURL,
-      chrome::kChromeUINewTabURL, chrome::kChromeUISettingsURL};
+      chrome::kChromeUINewTabURL, chrome::kChromeUISettingsURL,
+      chrome::kChromeUIBlankTabPageURL};
   // Prefix-match against the table above. Use strncmp to avoid allocating
   // memory to convert the URL prefix constants into std::strings.
   for (size_t i = 0; i < std::size(kInternalPagePrefixes); ++i) {

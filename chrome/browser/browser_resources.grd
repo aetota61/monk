@@ -296,6 +296,7 @@
         <include name="IDR_ABOUT_SYS_HTML" file="resources\about_sys\about_sys.html" type="BINDATA" />
         <include name="IDR_ABOUT_SYS_CSS" file="resources\about_sys\about_sys.css" type="BINDATA" />
         <include name="IDR_ABOUT_SYS_JS" file="resources\about_sys\about_sys.js" preprocess="true" type="BINDATA" />
+        <include name="IDR_MONK_WELCOME_LOGO" file="resources\monk_welcome\images\monk_logo.svg" type="BINDATA" />
 
         <!-- Page not available for guest. -->
         <include name="IDR_PAGE_NOT_AVAILABLE_FOR_GUEST_APP_HTML" file="resources\page_not_available_for_guest\app.html" type="BINDATA" />

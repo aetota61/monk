@@ -413,6 +413,7 @@ class Browser : public TabStripModelObserver,
     return initial_visible_on_all_workspaces_state_;
   }
   CreationSource creation_source() const { return creation_source_; }
+  const std::string& quote() const { return quote_; }
 
   // |window()| will return NULL if called before |CreateBrowserWindow()|
   // is done.
@@ -772,6 +773,10 @@ class Browser : public TabStripModelObserver,
 #if BUILDFLAG(ENABLE_SCREEN_AI_SERVICE)
   void RunScreenAIAnnotator();
 #endif
+
+  void setQuote(const std::string& quoteText) {
+    quote_ = quoteText;
+  }
 
  private:
   friend class BrowserTest;
@@ -1335,6 +1340,8 @@ class Browser : public TabStripModelObserver,
   raw_ptr<Browser> opener_browser_ = nullptr;
 
   WebContentsCollection web_contents_collection_{this};
+
+  std::string quote_;
 
   // The following factory is used for chrome update coalescing.
   base::WeakPtrFactory<Browser> chrome_updater_factory_{this};

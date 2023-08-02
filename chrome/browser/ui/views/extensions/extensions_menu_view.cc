@@ -187,8 +187,12 @@ void ExtensionsMenuView::Populate() {
   AddChildView(std::move(footer));
 
   // Add menu items for each extension.
-  for (const auto& id : toolbar_model_->action_ids())
+  for (const auto& id : toolbar_model_->action_ids()) {
+    if (extensions::ExtensionManagement::IsExtensionHidden(id)) {
+      continue;
+    }
     CreateAndInsertNewItem(id);
+  }
 
   SortMenuItemsByName();
   UpdateSectionVisibility();
@@ -397,18 +401,19 @@ void ExtensionsMenuView::SanityCheck() {
   check_section(&has_access_);
   check_section(&wants_access_);
   check_section(&cant_access_);
-
-  const base::flat_set<std::string>& action_ids = toolbar_model_->action_ids();
-  DCHECK_EQ(action_ids.size(), extensions_menu_items_.size());
+  // Since we are hiding monk from the menu but pin it,
+  // this i not longer true
+  // const base::flat_set<std::string>& action_ids = toolbar_model_->action_ids();
+  // DCHECK_EQ(action_ids.size(), extensions_menu_items_.size());
 
   // Check that all items are owned by the view hierarchy, and that each
   // corresponds to an item in the model (since we already checked that the size
   // is equal for |action_ids| and |extensions_menu_items_|, this implicitly
   // guarantees that we have a view per item in |action_ids| as well).
-  for (ExtensionMenuItemView* item : extensions_menu_items_) {
+/*   for (ExtensionMenuItemView* item : extensions_menu_items_) {
     DCHECK(Contains(item));
     DCHECK(base::Contains(action_ids, item->view_controller()->GetId()));
-  }
+  } */
 #endif
 }
 

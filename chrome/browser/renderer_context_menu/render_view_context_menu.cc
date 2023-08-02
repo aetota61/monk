@@ -1523,6 +1523,7 @@ void RenderViewContextMenu::AppendLinkItems() {
     const bool in_app = IsInProgressiveWebApp();
 
     bool show_open_in_new_window = true;
+    // Remove incognito mode context menu option.
     bool show_open_link_off_the_record = true;
 
 #if BUILDFLAG(IS_CHROMEOS_ASH)

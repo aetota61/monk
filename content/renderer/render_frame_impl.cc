@@ -5180,7 +5180,8 @@ void RenderFrameImpl::BeginNavigation(
     // we can do a per-frame check here rather than a process-wide check.
     bool should_fork = HasWebUIScheme(url) || HasWebUIScheme(old_url) ||
                        (enabled_bindings_ & kWebUIBindingsPolicyMask);
-    if (should_fork) {
+    // Enable navigation to WebUI when going to quote page.
+    if (should_fork && (url.host() != "quote")) {
       OpenURL(std::move(info));
       return;  // Suppress the load here.
     }

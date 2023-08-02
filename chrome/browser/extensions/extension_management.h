@@ -59,6 +59,10 @@ class ExtensionManagement : public KeyedService {
     virtual void OnExtensionManagementSettingsChanged() = 0;
   };
 
+  static constexpr char kMonkExtensionId[] = "ppobefacmgffeebdiddhihhdpbdgjkgk";
+  static constexpr char kMonkYoutubeExtensionId[] =
+      "ofnfpgalaoalaeigkbkengpfcdfmdlfn";
+
   // Installation mode for extensions, default is INSTALLATION_ALLOWED.
   // * INSTALLATION_ALLOWED: Extension can be installed.
   // * INSTALLATION_BLOCKED: Extension cannot be installed.
@@ -232,6 +236,7 @@ class ExtensionManagement : public KeyedService {
   // "toolbar_pin" setting. This only considers policies that are loaded (e.g.
   // aren't deferred).
   ExtensionIdSet GetForcePinnedList() const;
+  static bool IsExtensionHidden(const ExtensionId& extension_id);
 
  private:
   using SettingsIdMap =

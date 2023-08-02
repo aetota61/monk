@@ -1,0 +1,35 @@
+import("//chrome/common/features.gni")
+import("//tools/grit/grit_rule.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+
+assert(is_fuchsia || is_linux || is_mac || is_win)
+
+grit("apps_resources") {
+  defines = chrome_grit_defines
+
+  # These arguments are needed since the grd is generated at build time.
+  enable_input_discovery_for_gn_analyze = false
+  source = "$target_gen_dir/apps_resources.grd"
+  deps = [ ":build_apps_grd" ]
+
+  outputs = [
+    "grit/apps_resources.h",
+    "grit/apps_resources_map.cc",
+    "grit/apps_resources_map.h",
+    "apps_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chrome"
+}
+
+
+generate_grd("build_apps_grd") {
+  grd_prefix = "apps"
+  out_grd = "$target_gen_dir/${grd_prefix}_resources.grd"
+  input_files = [
+    "images/monk_logo.svg",
+  ]
+  input_files_base_dir = rebase_path(".", "//")
+
+  manifest_files =
+      filter_include( [ "*.manifest" ])
+}

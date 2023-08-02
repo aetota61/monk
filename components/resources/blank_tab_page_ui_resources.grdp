@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grit-part>
+  <include name="IDR_BLANK_TAB_PAGE_UI_CSS" file="../blank_tab_page_ui/resources/blank_tab_page.css" type="BINDATA" />
+  <if expr="is_android or is_ios">
+    <include name="IDR_BLANK_TAB_PAGE_UI_MOBILE_CSS" file="../blank_tab_page_ui/resources/blank_tab_page_mobile.css" type="BINDATA" />
+  </if>
+  <include name="IDR_BLANK_TAB_PAGE_UI_HTML" file="../blank_tab_page_ui/resources/blank_tab_page.html" preprocess="true" type="BINDATA" />
+  <include name="IDR_BLANK_TAB_PAGE_UI_JS" file="${root_gen_dir}/components/blank_tab_page_ui/resources/tsc/blank_tab_page.js" use_base_dir="false" type="BINDATA" />
+</grit-part>

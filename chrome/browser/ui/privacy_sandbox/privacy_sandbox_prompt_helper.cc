@@ -89,7 +89,8 @@ void PrivacySandboxPromptHelper::DidFinishNavigation(
   // isn't Chrome-controlled on ChromeOS, open an about blank tab to display the
   // prompt. On other platforms, it's being handled during the startup. This
   // logic can be removed when Lacros is ready.
-  if (web_contents()->GetLastCommittedURL() == chrome::kChromeUINewTabURL) {
+  if (web_contents()->GetLastCommittedURL() == chrome::kChromeUINewTabURL ||
+      web_contents()->GetLastCommittedURL() == chrome::kChromeUIBlankTabPageURL) {
     const bool has_extention_override =
         HasExtensionNtpOverride(extensions::ExtensionRegistry::Get(profile()));
 

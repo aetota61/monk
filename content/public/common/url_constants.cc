@@ -14,6 +14,7 @@ namespace content {
 const char kChromeDevToolsScheme[] = "devtools";
 const char kChromeErrorScheme[] = "chrome-error";
 const char kChromeUIScheme[] = "chrome";
+const char kMonkUIScheme[] = "monk";
 const char kChromeUIUntrustedScheme[] = "chrome-untrusted";
 const char kViewSourceScheme[] = "view-source";
 #if BUILDFLAG(IS_CHROMEOS_ASH)

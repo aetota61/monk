@@ -682,7 +682,8 @@ bool Browser::HasFindBarController() const {
 GURL Browser::GetNewTabURL() const {
   if (app_controller_)
     return app_controller_->GetAppNewTabUrl();
-  return GURL(chrome::kChromeUINewTabURL);
+  // return GURL(chrome::kChromeUINewTabURL);
+  return GURL(chrome::kChromeUIBlankTabPageURL);
 }
 
 gfx::Image Browser::GetCurrentPageIcon() const {
@@ -1838,10 +1839,14 @@ bool Browser::ShouldFocusLocationBarByDefault(WebContents* source) {
     if (virtual_url.SchemeIs(content::kViewSourceScheme))
       return false;
 
-    if ((url.SchemeIs(content::kChromeUIScheme) &&
+    if (((url.SchemeIs(content::kChromeUIScheme) &&
          url.host_piece() == chrome::kChromeUINewTabHost) ||
         (virtual_url.SchemeIs(content::kChromeUIScheme) &&
-         virtual_url.host_piece() == chrome::kChromeUINewTabHost)) {
+         virtual_url.host_piece() == chrome::kChromeUINewTabHost)) ||
+       ((url.SchemeIs(content::kChromeUIScheme) &&
+         url.host_piece() == chrome::kChromeUIBlankTabPageHost) ||
+        (virtual_url.SchemeIs(content::kChromeUIScheme) &&
+         virtual_url.host_piece() == chrome::kChromeUIBlankTabPageHost))) {
       return true;
     }
   }

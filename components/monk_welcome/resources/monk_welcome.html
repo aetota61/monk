@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="color-scheme" content="light dark" />
+    <title>Welcome</title>
+  </head>
+  <body>
+    <div id="outer">
+      <div id="logo"></div>
+      <div id="bottom">
+        <div id="quote">Less Distraction, More Productivity</div>
+        <div id="enter"><a href="chrome://newtab">Enter</a></div>
+      </div>
+    </div>
+    <style>
+      body {
+        font-family: "Baskerville", sans-serif;
+      }
+      #outer {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        height: 100vh;
+        gap: 50px;
+        font-size: 40px;
+        margin-top: 7%;
+      }
+      #enter {
+        text-align: center;
+      }
+      #enter > a {
+        color: black;
+      }
+      #quote {
+        text-align: center;
+      }
+      #bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+      }
+      #logo {
+        height: 25%;
+        width: 100%;
+        forced-color-adjust: none;
+        background-image: url(images/monk_logo.svg);
+        margin-left: auto;
+        margin-right: auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    </style>
+  </body>
+</html>

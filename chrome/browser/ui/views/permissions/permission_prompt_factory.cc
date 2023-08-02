@@ -56,7 +56,9 @@ bool ShouldIgnorePermissionRequest(
 
   // In case of the NTP, `WebContents::GetVisibleURL()` is equal to
   // `chrome://newtab/`, but the `LocationBarView` will be empty.
-  if (web_contents->GetVisibleURL() == GURL(chrome::kChromeUINewTabURL)) {
+  if (web_contents->GetVisibleURL() == GURL(chrome::kChromeUINewTabURL) ||
+      web_contents->GetVisibleURL() == GURL(chrome::kChromeUIBlankTabPageURL) ||
+      web_contents->GetVisibleURL() == GURL(chrome::kChromeUIQuoteURL)) {
     return false;
   }
 

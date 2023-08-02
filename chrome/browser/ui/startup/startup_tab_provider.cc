@@ -336,28 +336,15 @@ StartupTabs StartupTabProviderImpl::GetInitialPrefsTabsForState(
     const std::vector<GURL>& first_run_tabs) {
   // Constants: Magic words used by initial preferences files in place of a URL
   // host to indicate that internal pages should appear on first run.
-  static constexpr char kNewTabUrlHost[] = "new_tab_page";
-  static constexpr char kWelcomePageUrlHost[] = "welcome_page";
 
   StartupTabs tabs;
+
   if (is_first_run) {
-    tabs.reserve(first_run_tabs.size());
-    for (GURL url : first_run_tabs) {
-      if (url.host_piece() == kNewTabUrlHost) {
-        url = GURL(chrome::kChromeUINewTabURL);
-      } else if (url.host_piece() == kWelcomePageUrlHost) {
-#if BUILDFLAG(ENABLE_DICE_SUPPORT)
-        if (base::FeatureList::IsEnabled(kForYouFre)) {
-          // Do not show the in-tab welcome experience when the FRE is enabled.
-          continue;
-        } else {
-          url = GetWelcomePageUrl(false);
-        }
-#endif
-      }
-      tabs.emplace_back(url);
-    }
+    tabs.reserve(1);
+    GURL url("chrome://welcome");
+    tabs.emplace_back(url);
   }
+
   return tabs;
 }
 

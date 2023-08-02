@@ -96,7 +96,8 @@ void UpdateChromeLabsNewBadgePrefs(Profile* profile,
 }
 
 bool ShouldShowChromeLabsUI(const ChromeLabsModel* model, Profile* profile) {
-#if BUILDFLAG(IS_CHROMEOS_ASH)
+  return false;
+/* #if BUILDFLAG(IS_CHROMEOS_ASH)
   if (base::CommandLine::ForCurrentProcess()->HasSwitch(
           ash::switches::kSafeMode) ||
       !ash::ProfileHelper::IsPrimaryProfile(profile)) {
@@ -107,7 +108,7 @@ bool ShouldShowChromeLabsUI(const ChromeLabsModel* model, Profile* profile) {
   return base::ranges::any_of(model->GetLabInfo(),
                               [&profile](const LabInfo& lab) {
                                 return IsChromeLabsFeatureValid(lab, profile);
-                              });
+                              }); */
 }
 
 bool AreNewChromeLabsExperimentsAvailable(const ChromeLabsModel* model,

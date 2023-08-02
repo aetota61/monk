@@ -89,7 +89,8 @@ void ApplyGoogleSearchConfiguration(SideSearchConfig& config) {
       base::BindRepeating([](const GURL& url) {
         return !google_util::IsGoogleSearchUrl(url) &&
                !google_util::IsGoogleHomePageUrl(url) &&
-               url.spec() != chrome::kChromeUINewTabURL;
+               url.spec() != chrome::kChromeUINewTabURL &&
+               url.spec() != chrome::kChromeUIBlankTabPageURL;
       }));
 
   // Use the original predefined 'sidesearch' URL parameter for Google Search

@@ -174,6 +174,11 @@ bool VerifyBeginNavigationCommonParams(
   int process_id = process->GetID();
 
   // Verify (and possibly rewrite) |url|.
+  // We skip these checks if we are redirected to the quote page,
+  // normally renderer initiated navigation is not allowed to open
+  // chrome pages, but we want to do that to show the quote after we block
+  // access to a site.
+  if (common_params->url.host() == "quote") return true;
   process->FilterURL(false, &common_params->url);
   if (common_params->url.SchemeIs(kChromeErrorScheme)) {
     mojo::ReportBadMessage("Renderer cannot request error page URLs directly");

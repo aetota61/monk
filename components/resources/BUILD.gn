@@ -57,6 +57,8 @@ grit("components_resources") {
     "//components/flags_ui/resources:build_ts",
     "//components/security_interstitials/content/resources:build_ts",
     "//components/version_ui/resources:build_ts",
+    "//components/blank_tab_page_ui/resources:build_ts",
+    "//components/quote_ui/resources:build_ts",
   ]
 
   if (!is_ios) {

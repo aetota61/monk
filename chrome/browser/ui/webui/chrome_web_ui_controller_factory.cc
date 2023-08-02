@@ -155,6 +155,9 @@
 #include "chrome/browser/ui/webui/new_tab_page_third_party/new_tab_page_third_party_ui.h"
 #include "chrome/browser/ui/webui/ntp/new_tab_ui.h"
 #include "chrome/browser/ui/webui/ntp/ntp_resource_cache.h"
+#include "chrome/browser/ui/webui/blank_tab_page/blank_tab_page_ui.h"
+#include "chrome/browser/ui/webui/quote/quote_ui.h"
+#include "chrome/browser/ui/webui/monk_welcome/monk_welcome_ui.h"
 #include "chrome/browser/ui/webui/omnibox_popup/omnibox_popup_ui.h"
 #include "chrome/browser/ui/webui/page_not_available_for_guest/page_not_available_for_guest_ui.h"
 #include "chrome/browser/ui/webui/password_manager/password_manager_ui.h"
@@ -378,12 +381,12 @@ WebUIController* NewWebUI<HistoryClustersInternalsUI>(WebUI* web_ui,
           history_clusters_internals::kChromeUIHistoryClustersInternalsHost));
 }
 
-#if BUILDFLAG(ENABLE_DICE_SUPPORT)
+/* #if BUILDFLAG(ENABLE_DICE_SUPPORT)
 template <>
 WebUIController* NewWebUI<WelcomeUI>(WebUI* web_ui, const GURL& url) {
   return new WelcomeUI(web_ui, url);
 }
-#endif  // !BUILDFLAG(IS_ANDROID) && !BUILDFLAG(IS_CHROMEOS_ASH)
+#endif  // !BUILDFLAG(IS_ANDROID) && !BUILDFLAG(IS_CHROMEOS_ASH) */
 
 bool IsAboutUI(const GURL& url) {
   return (url.host_piece() == chrome::kChromeUIChromeURLsHost ||
@@ -539,6 +542,7 @@ WebUIFactoryFunction GetWebUIFactoryFunction(WebUI* web_ui,
        url.host_piece() == chrome::kChromeUIExtensionsHost ||
        url.host_piece() == chrome::kChromeUINewTabPageHost ||
        url.host_piece() == chrome::kChromeUINewTabPageThirdPartyHost ||
+       // url.host_piece() == chrome::kChromeUIBlankTabPageHost ||
        url.host_piece() == password_manager::kChromeUIPasswordManagerHost)) {
     return &NewWebUI<PageNotAvailableForGuestUI>;
   }
@@ -586,6 +590,11 @@ WebUIFactoryFunction GetWebUIFactoryFunction(WebUI* web_ui,
         return &NewWebUI<NewTabUI>;
     }
   }
+
+  if (url.host_piece() == chrome::kChromeUIBlankTabPageHost)
+    return &NewWebUI<BlankTabPageUI>;
+  if (url.host_piece() == chrome::kChromeUIQuoteHost)
+    return &NewWebUI<QuoteUI>;
   if (!profile->IsOffTheRecord()) {
     if (url.host_piece() == chrome::kChromeUINewTabPageHost)
       return &NewWebUI<NewTabPageUI>;
@@ -831,11 +840,12 @@ WebUIFactoryFunction GetWebUIFactoryFunction(WebUI* web_ui,
     return &NewWebUI<FamilyLinkUserInternalsUI>;
 #endif
 
-#if BUILDFLAG(ENABLE_DICE_SUPPORT)
-  if (url.host_piece() == chrome::kChromeUIWelcomeHost &&
-      welcome::IsEnabled(profile)) {
-    return &NewWebUI<WelcomeUI>;
+  if (url.host_piece() == chrome::kChromeUIWelcomeHost
+      ) {
+    return &NewWebUI<MonkWelcomeUI>;
   }
+#if BUILDFLAG(ENABLE_DICE_SUPPORT)
+
   if (url.host_piece() == chrome::kChromeUIDiceWebSigninInterceptHost)
     return &NewWebUI<DiceWebSigninInterceptUI>;
   if (url.host_piece() == chrome::kChromeUISigninReauthHost &&

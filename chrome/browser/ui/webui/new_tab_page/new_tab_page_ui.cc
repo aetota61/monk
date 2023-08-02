@@ -196,14 +196,18 @@ content::WebUIDataSource* CreateAndAddNewTabPageUiHtmlSource(Profile* profile) {
       base::FeatureList::IsEnabled(
           ntp_features::kNtpHandleMostVisitedNavigationExplicitly));
 
+  // Remove options from the start page.
   source->AddBoolean(
       "oneGoogleBarEnabled",
-      base::FeatureList::IsEnabled(ntp_features::kNtpOneGoogleBar));
+      false);
+      // base::FeatureList::IsEnabled(ntp_features::kNtpOneGoogleBar));
   source->AddBoolean("shortcutsEnabled",
-                     base::FeatureList::IsEnabled(ntp_features::kNtpShortcuts));
+                    false);
+                    //base::FeatureList::IsEnabled(ntp_features::kNtpShortcuts));
   source->AddBoolean(
       "singleRowShortcutsEnabled",
-      base::FeatureList::IsEnabled(ntp_features::kNtpSingleRowShortcuts));
+      false);
+      //base::FeatureList::IsEnabled(ntp_features::kNtpSingleRowShortcuts));
   source->AddBoolean("logoEnabled",
                      base::FeatureList::IsEnabled(ntp_features::kNtpLogo));
   source->AddBoolean(

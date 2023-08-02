@@ -591,6 +591,12 @@ base::WeakPtr<content::NavigationHandle> Navigate(NavigateParams* params) {
     return nullptr;
   }
 
+  if (params->url.SchemeIs(content::kMonkUIScheme)) {
+    GURL::Replacements replacements;
+    replacements.SetSchemeStr(content::kChromeUIScheme);
+    params->url = params->url.ReplaceComponents(replacements);
+  }
+
   // Open System Apps in their standalone window if necessary.
   // TODO(crbug.com/1096345): Remove this code after we integrate with intent
   // handling.
@@ -860,6 +866,8 @@ base::WeakPtr<content::NavigationHandle> Navigate(NavigateParams* params) {
           if (params->source_contents->GetController().CanGoBack() ||
               (params->source_contents->GetLastCommittedURL().spec() !=
                    chrome::kChromeUINewTabURL &&
+               params->source_contents->GetLastCommittedURL().spec() !=
+                   chrome::kChromeUIBlankTabPageURL &&
                params->source_contents->GetLastCommittedURL().spec() !=
                    url::kAboutBlankURL)) {
             // Blur location bar before state save in ActivateTabAt() below.
