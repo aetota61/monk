@@ -1955,16 +1955,23 @@ void HTMLAnchorElement::HandleClick(Event& event) {
   }
   auto category_iter = website_categories.find(host);
   if (category_iter != website_categories.end()) {
-      std::string category = category_iter->second;
-      std::vector<std::string> quotes = category_quotes[category];
-      std::string quote = quotes[rand() % quotes.size()];
-      // browser->setQuote(quote);
-      std::string url_str = std::string("chrome://quote?") + quote;
-      if (category == "news") {
-        url_str += "&" + completed_url.GetString().Utf8();
+      std::string window_host = window->Url().Host().Utf8();
+      if (window_host.substr(0, 4) == "www.") {
+        window_host = window_host.substr(4);
       }
-      completed_url = KURL(String::FromUTF8(url_str));
-      // setAlwaysBlock();
+
+      if(window_host != host) {
+        std::string category = category_iter->second;
+        std::vector<std::string> quotes = category_quotes[category];
+        std::string quote = quotes[rand() % quotes.size()];
+        // browser->setQuote(quote);
+        std::string url_str = std::string("chrome://quote?") + quote;
+        if (category == "news") {
+          url_str += "&" + completed_url.GetString().Utf8();
+        }
+        completed_url = KURL(String::FromUTF8(url_str));
+        // setAlwaysBlock();
+      }
   }
 
   // Schedule the ping before the frame load. Prerender in Chrome may kill the
