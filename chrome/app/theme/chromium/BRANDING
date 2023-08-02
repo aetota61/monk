@@ -5,6 +5,6 @@ PRODUCT_SHORTNAME=Monk
 PRODUCT_INSTALLER_FULLNAME=Monk Installer
 PRODUCT_INSTALLER_SHORTNAME=Monk Installer
 COPYRIGHT=Copyright @LASTCHANGE_YEAR@ The Monk Authors. All rights reserved.
-MAC_BUNDLE_ID=org.chromium.Chromium
+MAC_BUNDLE_ID=com.alphacopperstudios.Monk
 MAC_CREATOR_CODE=Cr24
 MAC_TEAM_ID=
