@@ -456,6 +456,7 @@ def _package_dmg(paths, dist, config):
         '--volname', config.app_product,
         '--copy', '{}:/'.format(app_path),
         '--symlink', '/Applications:/ ',
+        '--icon', os.path.join(packaging_dir, "dmg.icns"),
     ]
     # yapf: enable
 

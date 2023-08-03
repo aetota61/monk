@@ -101,6 +101,7 @@ copy("copies") {
     "//chrome/app/helper-gpu-entitlements.plist",
     "//chrome/app/helper-plugin-entitlements.plist",
     "//chrome/app/helper-renderer-entitlements.plist",
+    "//chrome/app/theme/chromium/mac/dmg.icns",
     "dirdiffer.sh",
     "dirpatcher.sh",
     "dmgdiffer.sh",
