@@ -57,7 +57,7 @@ bool IsBrowserSigninAllowedByCommandLine() {
     return base::ToLowerASCII(allowBrowserSignin) == "true";
   }
   // If the commandline flag is not provided, the default is true.
-  return true;
+  return false;
 }
 
 // Returns true if Desktop Identity Consistency can be enabled for this build
