@@ -110,7 +110,7 @@ IntroUI::IntroUI(content::WebUI* web_ui) : content::WebUIController(web_ui) {
 #if BUILDFLAG(ENABLE_DICE_SUPPORT)
   source->AddBoolean("isDeviceManaged", is_device_managed);
 
-  source->AddResourcePath("images/product-logo.svg", IDR_PRODUCT_LOGO_SVG);
+  source->AddResourcePath("images/product-logo.svg", IDR_PRODUCT_LOGO_CHROME_SVG);
   source->AddResourcePath("images/product-logo-animation.svg",
                           IDR_PRODUCT_LOGO_ANIMATION_SVG);
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
