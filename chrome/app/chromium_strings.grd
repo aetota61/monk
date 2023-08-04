@@ -453,10 +453,10 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
       </if>
       <!-- Sharing messages -->
       <message name="IDS_BROWSER_SHARING_CLICK_TO_CALL_DIALOG_HELP_TEXT_NO_DEVICES" desc="The label to be shown as a help text of the dialog when user click on a phone number, if there are no phones to choose from.">
-        To send a number from here to your Android phone, sign in to Monk on both devices.
+        To send a number from here to your Android phone, sign in to Chrome on both devices.
       </message>
       <message name="IDS_BROWSER_SHARING_CLICK_TO_CALL_DIALOG_HELP_TEXT_NO_DEVICES_ORIGIN" desc="The label to be shown as a help text of the dialog when user click on a phone number, if there are no phones to choose from.">
-        To send a number from <ph name="ORIGIN">$1<ex>www.google.com</ex></ph> to your Android phone, sign in to Monk on both devices.
+        To send a number from <ph name="ORIGIN">$1<ex>www.google.com</ex></ph> to your Android phone, sign in to Chrome on both devices.
       </message>
       <message name="IDS_BROWSER_SHARING_ERROR_DIALOG_TEXT_DEVICE_NOT_FOUND" desc="The text to be shown on the dialog when an error occurred because the device is not synced.">
         Make sure you are signed in to Monk on your <ph name="TARGET_DEVICE_NAME">$1<ex>Pixel XL</ex></ph> and then try sending again.
@@ -1056,7 +1056,7 @@ Permissions you've already given to websites and apps may apply to this account.
       <if expr="not is_android and not chromeos_ash">
         <!-- User pod remove sync warning text -->
         <message name="IDS_LOGIN_POD_USER_REMOVE_WARNING_SYNC" desc="Main text shown as a warning when attempting to remove an user.">
-          This person's browsing data will be deleted from this device. To recover the data, sign in to Monk as <ph name="USER_EMAIL">$2<ex>foo@example.com</ex></ph>.
+          This person's browsing data will be deleted from this device. To recover the data, sign in to Chrome as <ph name="USER_EMAIL">$2<ex>foo@example.com</ex></ph>.
         </message>
 
         <!-- Tutorial -->
@@ -1470,10 +1470,10 @@ Permissions you've already given to websites and apps may apply to this account.
             To access your Monk browser stuff across all your devices, sign in, then turn on sync
           </message>
           <message name="IDS_PROFILE_PICKER_PROFILE_CREATION_FLOW_ACCOUNT_SELECTION_LACROS_SUBTITLE" desc="Profile picker, account selection screen subtitle">
-            Sign in to Monk
+            Sign in to Chrome
           </message>
           <message name="IDS_PROFILE_PICKER_PROFILE_CREATION_FLOW_ACCOUNT_SELECTION_LACROS_SUBTITLE_WITH_GUEST" desc="Profile picker, account selection screen subtitle">
-            Sign in to Chromium. If you want to sign in an account one-time only, you can <ph name="GUEST_LINK_BEGIN">&lt;a id="guestModeLink" href="#"&gt;</ph>use the device as guest<ph name="GUEST_LINK_END">&lt;/a&gt;</ph>.
+            Sign in to Chrome. If you want to sign in an account one-time only, you can <ph name="GUEST_LINK_BEGIN">&lt;a id="guestModeLink" href="#"&gt;</ph>use the device as guest<ph name="GUEST_LINK_END">&lt;/a&gt;</ph>.
           </message>
         </if>
         <if expr="not chromeos_lacros">
@@ -1527,7 +1527,7 @@ Permissions you've already given to websites and apps may apply to this account.
         <if expr="not chromeos_lacros">
           <message name="IDS_FRE_SIGN_IN_TITLE_0"
             desc="This string appears as a heading on a full-page screen that asks the user to sign in to Monk with their Google Account. It appears when the user launches Monk for the first time. When they sign in, they can personalize and customize Monk and remember their settings in their Google Account. The tone should be inviting and alluring.">
-            Sign in to Monk
+            Sign in to Chrome
           </message>
           <message name="IDS_FRE_SIGN_IN_TITLE_1"
             desc="This string appears as a heading on a full-page screen that asks the user to sign in to Monk with their Google Account. It appears when the user launches Monk for the first time. When they sign in, they can personalize and customize Monk and remember their settings in their Google Account. The tone should be inviting and alluring.">

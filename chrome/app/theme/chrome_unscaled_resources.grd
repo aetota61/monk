@@ -102,6 +102,7 @@
             <include name="IDR_WEBSTORE_APP_ICON_128" file="chromium/chromeos/webstore_app_icon_128.png" type="BINDATA" />
           </if>
           <include name="IDR_PRODUCT_LOGO_SVG" file="chromium/product_logo.svg" type="BINDATA" />
+          <include name="IDR_PRODUCT_LOGO_CHROME_SVG" file="chromium/chrome_logo.svg" type="BINDATA" />
           <include name="IDR_PRODUCT_LOGO_ANIMATION_SVG" file="chromium/product_logo_animation.svg" type="BINDATA" />
         </else>
       </if> <!-- _google_chrome -->
